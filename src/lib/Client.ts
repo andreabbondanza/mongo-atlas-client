@@ -2,7 +2,7 @@ import { Filter, UpdateFilter } from "mongodb";
 import { Actions } from "./Actions.js";
 import { Query } from "./Query.js";
 import { ConnectionData } from "./ConnectionData.js";
-import { IRequest } from "./IRequest.js";
+import { Request } from "./Request.js";
 import { IMongoFindOneResponse, IMongoFindResponse, IMongoInsertOneResponse, IMongoInsertManyResponse, IMongoDeleteResponse, IMongoUpdateResponse, IMongoReplaceResponse } from "./Responses.js";
 
 export class Client
@@ -11,7 +11,7 @@ export class Client
     private _apiKey: string;
     private _database: string;
     private _dataSource: string;
-    private _request: IRequest;
+    private _request: Request;
     private _log?: (message: string) => void;
 
     private getHeaders(): any
@@ -48,7 +48,7 @@ export class Client
                 if (options.skip) body.skip = options.skip;
                 if (options.projection) body.projection = options.projection;
             }
-            const response = await this._request.request<T>(this.getActionUrl("findOne"), body, this.getHeaders(), "findOne");
+            const response = await this._request(this.getActionUrl("findOne"), body, this.getHeaders(), "findOne");
             result = JSON.parse(response) as IMongoFindOneResponse<T>;
         }
         catch (error)
@@ -80,7 +80,7 @@ export class Client
                 if (options.skip) body.skip = options.skip;
                 if (options.projection) body.projection = options.projection;
             }
-            const response = await this._request.request<T>(this.getActionUrl("find"), body, this.getHeaders(), "find");
+            const response = await this._request    (this.getActionUrl("find"), body, this.getHeaders(), "find");
             result = JSON.parse(response) as IMongoFindResponse<T>;
         }
         catch (error)
@@ -104,7 +104,7 @@ export class Client
         {
             const body = new Query<T>({ dataSource: this._dataSource, database: this._database, collection });
             body.document = document;
-            const response = await this._request.request<T>(this.getActionUrl("insertOne"), body, this.getHeaders(),"insertOne");
+            const response = await this._request(this.getActionUrl("insertOne"), body, this.getHeaders(),"insertOne");
             result = JSON.parse(response) as IMongoInsertOneResponse;
         }
         catch (error)
@@ -127,7 +127,7 @@ export class Client
         {
             const body = new Query<T>({ dataSource: this._dataSource, database: this._database, collection });
             body.documents = documents;
-            const response = await this._request.request<T>(this.getActionUrl("insertMany"), body, this.getHeaders(), "insertMany");
+            const response = await this._request(this.getActionUrl("insertMany"), body, this.getHeaders(), "insertMany");
             result = JSON.parse(response) as IMongoInsertManyResponse;
         }
         catch (error)
@@ -150,7 +150,7 @@ export class Client
         {
             const body = new Query<T>({ dataSource: this._dataSource, database: this._database, collection });
             body.filter = filter;
-            const response = await this._request.request<T>(this.getActionUrl("deleteOne"), body, this.getHeaders(), "deleteOne");
+            const response = await this._request(this.getActionUrl("deleteOne"), body, this.getHeaders(), "deleteOne");
             result = JSON.parse(response) as IMongoDeleteResponse;
         }
         catch (error)
@@ -173,7 +173,7 @@ export class Client
         {
             const body = new Query<T>({ dataSource: this._dataSource, database: this._database, collection });
             body.filter = filter;
-            const response = await this._request.request<T>(this.getActionUrl("deleteMany"), body, this.getHeaders(), "deleteMany");
+            const response = await this._request(this.getActionUrl("deleteMany"), body, this.getHeaders(), "deleteMany");
             result = JSON.parse(response) as IMongoDeleteResponse;
         }
         catch (error)
@@ -200,7 +200,7 @@ export class Client
             body.filter = filter;
             body.updateFilter = update;
             body.upsert = upsert;
-            const response = await this._request.request<T>(this.getActionUrl("updateOne"), body, this.getHeaders(), "updateOne");
+            const response = await this._request(this.getActionUrl("updateOne"), body, this.getHeaders(), "updateOne");
             result = JSON.parse(response) as IMongoUpdateResponse;
         }
         catch (error)
@@ -227,7 +227,7 @@ export class Client
             body.filter = filter;
             body.updateFilter = update;
             body.upsert = upsert;
-            const response = await this._request.request<T>(this.getActionUrl("updateMany"), body, this.getHeaders(), "updateMany");
+            const response = await this._request(this.getActionUrl("updateMany"), body, this.getHeaders(), "updateMany");
             result = JSON.parse(response) as IMongoUpdateResponse;
         }
         catch (error)
@@ -254,7 +254,7 @@ export class Client
             body.filter = filter;
             body.replacement = data;
             body.upsert = upsert;
-            const response = await this._request.request<T>(this.getActionUrl("replaceOne"), body, this.getHeaders(), "replaceOne");
+            const response = await this._request(this.getActionUrl("replaceOne"), body, this.getHeaders(), "replaceOne");
             result = JSON.parse(response) as IMongoReplaceResponse;
         }
         catch (error)
@@ -271,7 +271,7 @@ export class Client
      * @param request the request handler
      * @param log optional log function, if not passed console.log will be used
      */
-    public constructor(cData: ConnectionData, request: IRequest, log?: (message: string) => void)
+    public constructor(cData: ConnectionData, request: Request, log?: (message: string) => void)
     {
         this._atlasEndpoint = cData.atlasEndPoint;
         this._apiKey = cData.apikey;

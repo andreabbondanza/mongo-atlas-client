@@ -1,6 +1,6 @@
 export { Client } from './lib/Client.js';
 export { ConnectionData } from './lib/ConnectionData.js';
-export { IRequest } from './lib/IRequest.js';
+export { Request } from './lib/Request.js';
 export { Query } from './lib/Query.js';
 export
 {

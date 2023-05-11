@@ -1,6 +1,6 @@
 # mongo-atlas-client
 
-Find it on (NPM)[https://www.npmjs.com/package/mongo-atlas-client]
+Find it on [NPM](https://www.npmjs.com/package/mongo-atlas-client)
 ## The need
 
 I needed a simple way to interact with the [MongoDB Atlas DATA-API](https://www.mongodb.com/docs/atlas/api/data-api-resources/) using the apikey and using the mongodb types, with typescript. Additionally, I took the opportunity to learn how to publish pure ESM modules to npm.

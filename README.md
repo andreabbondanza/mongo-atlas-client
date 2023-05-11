@@ -2,7 +2,7 @@
 
 ## The need
 
-I needed a simple way to interact with the [MongoDB Atlas DATA-API](https://www.mongodb.com/docs/atlas/api/data-api-resources/) using the apikey and using the mongodb types, with typescript. I also used the opportunity to learn how to publish pure esm modules to npm.
+I needed a simple way to interact with the [MongoDB Atlas DATA-API](https://www.mongodb.com/docs/atlas/api/data-api-resources/) using the apikey and using the mongodb types, with typescript. Additionally, I took the opportunity to learn how to publish pure ESM modules to npm.
 
 ## The data you need to use it
 
@@ -55,7 +55,7 @@ export class ConnectionData
 
 ## Dependency Injection
 
-To let use your favourite http client library, when you initialize the _Client_ class, you can pass a callback that use your http client to make the request. The callback must return a string via promise that resolve to the response body. The callback will receive:
+To allow to use your favorite http client library, when you initialize the _Client_ class, you can pass a callback that use your http client to make the request. The callback must return a string via promise that resolve to the response body. The callback will receive:
 - the endpoint (url with the action);
 - the body;
 - the headers;

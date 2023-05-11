@@ -1,0 +1,1 @@
+export type Actions = "findOne" | "find" | "insertOne" | "insertMany" | "deleteOne" | "deleteMany" | "updateOne" | "updateMany" | "replaceOne";

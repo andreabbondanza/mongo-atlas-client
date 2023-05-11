@@ -1,0 +1,23 @@
+{
+  "name": "mongo-atlas-client",
+  "version": "0.4.0",
+  "description": "A mongo-atlas client with dependency injection for the http-client",
+  "main": "dist/index.js",
+  "types": "dist/index.d.ts",
+  "module": "dist/index.esm.js",
+  "repository": "git@github.com:andreabbondanza/mongo-atlas-client.git",
+  "author": "Andrea Vincenzo Abbondanza",
+  "license": "MIT",
+  "type": "module",
+  "files": [
+    "dist/**/*",
+    "README.md"
+  ],
+  "scripts": {
+    "build": "tsc"
+  },
+  "devDependencies": {
+    "@types/mongodb": "^4.0.7",
+    "typescript": "^5.0.4"
+  }
+}

@@ -1,5 +1,9 @@
 # mongo-atlas-client
 
+# NOTE ⚠️
+
+This isn't a library for the API of **MONGO ATLAS Platform**, this library is for the **MONGO ATLAS DATA API**
+
 Find it on [NPM](https://www.npmjs.com/package/mongo-atlas-client)
 ## The need
 

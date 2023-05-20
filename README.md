@@ -1,6 +1,7 @@
 # mongo-atlas-client
 
 Find it on [NPM](https://www.npmjs.com/package/mongo-atlas-client)
+
 ## The need
 
 I needed a simple way to interact with the [MongoDB Atlas DATA-API](https://www.mongodb.com/docs/atlas/api/data-api-resources/) using the apikey and using the mongodb types, with typescript. Additionally, I took the opportunity to learn how to publish pure ESM modules to npm.
@@ -211,4 +212,9 @@ In this example you can see the use of the library.
 4. Then we create a new user and we insert it in the database.
 
 As you can see, the library support the MongoDB filters and for the response it use the MongoDB response types.
+
+
+# NOTE ⚠️
+
+This isn't a library for the API of **MONGO ATLAS Platform**, this library is for the **MONGO ATLAS DATA API**
 

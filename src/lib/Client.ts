@@ -4,6 +4,7 @@ import { Query } from "./Query.js";
 import { ConnectionData } from "./ConnectionData.js";
 import { Request } from "./Request.js";
 import { IMongoFindOneResponse, IMongoFindResponse, IMongoInsertOneResponse, IMongoInsertManyResponse, IMongoDeleteResponse, IMongoUpdateResponse, IMongoReplaceResponse } from "./Responses.js";
+import { IQueryOptions } from "./IQueryOptions.js";
 
 export class Client
 {
@@ -34,7 +35,7 @@ export class Client
      * @param options options
      * @returns 
      */
-    public async findOne<T>(collection: string, filter: Filter<T>, options?: { projection?: any, skip?: number, limit?: number, sort?: string }): Promise<IMongoFindOneResponse<T> | null>
+    public async findOne<T>(collection: string, filter: Filter<T>, options?: IQueryOptions): Promise<IMongoFindOneResponse<T> | null>
     {
         let result: IMongoFindOneResponse<T> | null = null;
         try
@@ -66,7 +67,7 @@ export class Client
      * @param options options
      * @returns 
      */
-    public async find<T>(collection: string, filter: Filter<T>, options?: { projection?: any, skip?: number, limit?: number, sort?: string }): Promise<IMongoFindResponse<T> | null>
+    public async find<T>(collection: string, filter: Filter<T>, options?: IQueryOptions): Promise<IMongoFindResponse<T> | null>
     {
         let result: IMongoFindResponse<T> | null = null;
         try

@@ -18,7 +18,7 @@ export class Client
     private getHeaders(): any
     {
         return {
-            'Content-Type': 'application/json',
+            'Content-Type': 'application/ejson',
             'Access-Control-Request-Headers': '*',
             'api-key': this._apiKey,
         }

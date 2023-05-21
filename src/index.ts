@@ -14,4 +14,3 @@ export
 } from './lib/Responses.js';
 export { Actions } from './lib/Actions.js';
 export { IQueryOptions } from './lib/IQueryOptions.js';
-export { EObjectId } from './lib/Extensions.js';

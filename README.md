@@ -61,12 +61,13 @@ To allow to use your favorite http client library, when you initialize the _Clie
 - the endpoint (url with the action);
 - the body;
 - the headers;
+- the stringify function for with the EJSON support;
 - the action (find, findOne, deleteOne, etc.)
 
 Here the type request:
 
 ```typescript
-export type Request = (url: string, body: any, headers: any, action: Actions) => Promise<string>
+export type Request = (url: string, body: any, headers: any, (obj: any) => EJSON.stringify(obj), action: Actions) => Promise<string>
 ```
 
 TO the client you can also pass a log callback, if not, it will be used the console.log function
@@ -181,9 +182,9 @@ async function example()
         atlasEndPoint: "endpoint"
     });
     // set the request callback with got library
-    const myRequest: Request = async (url: string, body: any, headers: any, action: string) =>
+    const myRequest: Request = async (url: string, body: any, headers: any, stringify: (obj: any) => string, action: string) =>
     {
-        const response = await got.post(url, { body: JSON.stringify(body), headers });
+        const response = await got.post(url, { body: stringify(body), headers });
         return response.body;
     };
     // create the client

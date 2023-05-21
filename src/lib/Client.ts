@@ -5,6 +5,7 @@ import { ConnectionData } from "./ConnectionData.js";
 import { Request } from "./Request.js";
 import { IMongoFindOneResponse, IMongoFindResponse, IMongoInsertOneResponse, IMongoInsertManyResponse, IMongoDeleteResponse, IMongoUpdateResponse, IMongoReplaceResponse } from "./Responses.js";
 import { IQueryOptions } from "./IQueryOptions.js";
+import { EJSON } from "bson";
 
 export class Client
 {
@@ -49,8 +50,8 @@ export class Client
                 if (options.skip) body.skip = options.skip;
                 if (options.projection) body.projection = options.projection;
             }
-            const response = await this._request(this.getActionUrl("findOne"), body, this.getHeaders(), "findOne");
-            result = JSON.parse(response) as IMongoFindOneResponse<T>;
+            const response = await this._request(this.getActionUrl("findOne"), body, this.getHeaders(), (obj: any) => EJSON.stringify(obj), "findOne");
+            result = EJSON.parse(response) as IMongoFindOneResponse<T>;
         }
         catch (error)
         {
@@ -81,8 +82,8 @@ export class Client
                 if (options.skip) body.skip = options.skip;
                 if (options.projection) body.projection = options.projection;
             }
-            const response = await this._request    (this.getActionUrl("find"), body, this.getHeaders(), "find");
-            result = JSON.parse(response) as IMongoFindResponse<T>;
+            const response = await this._request(this.getActionUrl("find"), body, this.getHeaders(), (obj: any) => EJSON.stringify(obj), "find");
+            result = EJSON.parse(response) as IMongoFindResponse<T>;
         }
         catch (error)
         {
@@ -105,8 +106,8 @@ export class Client
         {
             const body = new Query<T>({ dataSource: this._dataSource, database: this._database, collection });
             body.document = document;
-            const response = await this._request(this.getActionUrl("insertOne"), body, this.getHeaders(),"insertOne");
-            result = JSON.parse(response) as IMongoInsertOneResponse;
+            const response = await this._request(this.getActionUrl("insertOne"), body, this.getHeaders(), (obj: any) => EJSON.stringify(obj), "insertOne");
+            result = EJSON.parse(response) as IMongoInsertOneResponse;
         }
         catch (error)
         {
@@ -128,8 +129,8 @@ export class Client
         {
             const body = new Query<T>({ dataSource: this._dataSource, database: this._database, collection });
             body.documents = documents;
-            const response = await this._request(this.getActionUrl("insertMany"), body, this.getHeaders(), "insertMany");
-            result = JSON.parse(response) as IMongoInsertManyResponse;
+            const response = await this._request(this.getActionUrl("insertMany"), body, this.getHeaders(), (obj: any) => EJSON.stringify(obj), "insertMany");
+            result = EJSON.parse(response) as IMongoInsertManyResponse;
         }
         catch (error)
         {
@@ -151,8 +152,8 @@ export class Client
         {
             const body = new Query<T>({ dataSource: this._dataSource, database: this._database, collection });
             body.filter = filter;
-            const response = await this._request(this.getActionUrl("deleteOne"), body, this.getHeaders(), "deleteOne");
-            result = JSON.parse(response) as IMongoDeleteResponse;
+            const response = await this._request(this.getActionUrl("deleteOne"), body, this.getHeaders(), (obj: any) => EJSON.stringify(obj), "deleteOne");
+            result = EJSON.parse(response) as IMongoDeleteResponse;
         }
         catch (error)
         {
@@ -174,8 +175,8 @@ export class Client
         {
             const body = new Query<T>({ dataSource: this._dataSource, database: this._database, collection });
             body.filter = filter;
-            const response = await this._request(this.getActionUrl("deleteMany"), body, this.getHeaders(), "deleteMany");
-            result = JSON.parse(response) as IMongoDeleteResponse;
+            const response = await this._request(this.getActionUrl("deleteMany"), body, this.getHeaders(), (obj: any) => EJSON.stringify(obj), "deleteMany");
+            result = EJSON.parse(response) as IMongoDeleteResponse;
         }
         catch (error)
         {
@@ -201,8 +202,8 @@ export class Client
             body.filter = filter;
             body.updateFilter = update;
             body.upsert = upsert;
-            const response = await this._request(this.getActionUrl("updateOne"), body, this.getHeaders(), "updateOne");
-            result = JSON.parse(response) as IMongoUpdateResponse;
+            const response = await this._request(this.getActionUrl("updateOne"), body, this.getHeaders(), (obj: any) => EJSON.stringify(obj), "updateOne");
+            result = EJSON.parse(response) as IMongoUpdateResponse;
         }
         catch (error)
         {
@@ -228,8 +229,8 @@ export class Client
             body.filter = filter;
             body.updateFilter = update;
             body.upsert = upsert;
-            const response = await this._request(this.getActionUrl("updateMany"), body, this.getHeaders(), "updateMany");
-            result = JSON.parse(response) as IMongoUpdateResponse;
+            const response = await this._request(this.getActionUrl("updateMany"), body, this.getHeaders(), (obj: any) => EJSON.stringify(obj), "updateMany");
+            result = EJSON.parse(response) as IMongoUpdateResponse;
         }
         catch (error)
         {
@@ -255,8 +256,8 @@ export class Client
             body.filter = filter;
             body.replacement = data;
             body.upsert = upsert;
-            const response = await this._request(this.getActionUrl("replaceOne"), body, this.getHeaders(), "replaceOne");
-            result = JSON.parse(response) as IMongoReplaceResponse;
+            const response = await this._request(this.getActionUrl("replaceOne"), body, this.getHeaders(), (obj: any) => EJSON.stringify(obj), "replaceOne");
+            result = EJSON.parse(response) as IMongoReplaceResponse;
         }
         catch (error)
         {

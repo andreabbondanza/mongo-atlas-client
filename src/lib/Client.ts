@@ -200,7 +200,7 @@ export class Client
         {
             const body = new Query<T>({ dataSource: this._dataSource, database: this._database, collection });
             body.filter = filter;
-            body.updateFilter = update;
+            body.update = update;
             body.upsert = upsert;
             const response = await this._request(this.getActionUrl("updateOne"), body, this.getHeaders(), (obj: any) => EJSON.stringify(obj), "updateOne");
             result = JSON.parse(response) as IMongoUpdateResponse;
@@ -227,7 +227,7 @@ export class Client
         {
             const body = new Query<T>({ dataSource: this._dataSource, database: this._database, collection });
             body.filter = filter;
-            body.updateFilter = update;
+            body.update = update;
             body.upsert = upsert;
             const response = await this._request(this.getActionUrl("updateMany"), body, this.getHeaders(), (obj: any) => EJSON.stringify(obj), "updateMany");
             result = JSON.parse(response) as IMongoUpdateResponse;

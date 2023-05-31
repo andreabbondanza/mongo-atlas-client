@@ -21,7 +21,7 @@ export class Query<T>
     /**
      * the filter to update
      */
-    public updateFilter?: UpdateFilter<T>;
+    public update?: UpdateFilter<T>;
     /**
      * upsert the document if it does not exist
      */

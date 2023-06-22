@@ -1,4 +1,4 @@
-import { Filter, UpdateFilter } from "mongodb";
+import { Document, Filter, UpdateFilter } from "mongodb";
 
 export class Query<T>
 {
@@ -55,6 +55,8 @@ export class Query<T>
      */
     public documents?: T[];
 
+    public pipeline?: Document[];
+
     /**
      * Constructor
      * @param config the configuration for the query 
@@ -67,3 +69,5 @@ export class Query<T>
     }
 
 }
+
+const query = new Query({ dataSource: "cluster0", database: "test", collection: "test" });
